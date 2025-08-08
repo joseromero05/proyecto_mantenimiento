@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Solicitudes de Mantenimiento</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Sistema de Solicitudes de Mantenimiento</h1>
+
+    <form action="/solicitud" method="post">
+        <label>ID Usuario:</label><input type="number" name="user_id" required><br>
+        <label>ID Equipo:</label><input type="number" name="equipment_id" required><br>
+        <label>Tipo:</label>
+        <select name="tipo">
+            <option value="preventivo">Preventivo</option>
+            <option value="correctivo">Correctivo</option>
+        </select><br>
+        <label>Descripción:</label><br>
+        <textarea name="descripcion"></textarea><br>
+        <button type="submit">Enviar Solicitud</button>
+    </form>
+
+    <h2>Solicitudes Registradas</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th><th>Usuario</th><th>Equipo</th><th>Tipo</th><th>Estado</th><th>Descripción</th>
+        </tr>
+        {% for s in solicitudes %}
+        <tr>
+            <td>{{ s.id }}</td>
+            <td>{{ s.user_id }}</td>
+            <td>{{ s.equipment_id }}</td>
+            <td>{{ s.type }}</td>
+            <td>{{ s.status }}</td>
+            <td>{{ s.description }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
